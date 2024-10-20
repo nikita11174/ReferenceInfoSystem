@@ -1,0 +1,40 @@
+﻿<Window x:Class="ReferenceInfoSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:resources="clr-namespace:ReferenceInfoSystem.Resources"
+        Title="{x:Static resources:Resources.WindowTitle}" Height="600" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+            <Label x:Name="DeviceTypeLabel" Content="{x:Static resources:Resources.DeviceType}" VerticalAlignment="Center"/>
+            <ComboBox x:Name="DeviceTypeComboBox" Width="200" Margin="10,0,0,0" 
+                      DisplayMemberPath="LocalName" 
+                      SelectedValuePath="Name"/>
+            <Button x:Name="LoadButton" Content="{x:Static resources:Resources.LoadButton}" Click="LoadButton_Click" Margin="10,0,0,0"/>
+            <Button x:Name="LanguageButton" Content="{x:Static resources:Resources.Language}" Click="LanguageButton_Click" HorizontalAlignment="Right" Margin="10,0,0,0" Width="100"/>
+        </StackPanel>
+        <DataGrid x:Name="DevicesDataGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="DevicesDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="identificator" Header="{x:Static resources:Resources.ID}" Binding="{Binding Id}" Width="*"/>
+                <DataGridTextColumn x:Name="Designation" Header="{x:Static resources:Resources.Designation}" Binding="{Binding Code}" Width="*"/>
+                <DataGridTextColumn x:Name="Name" Header="{x:Static resources:Resources.Name}" Binding="{Binding Name}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <GroupBox x:Name="Properties" Header="{x:Static resources:Resources.Properties}" Grid.Row="2" Margin="0,10,0,0">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <DataGrid x:Name="PropertiesDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" 
+                          CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" 
+                          CanUserResizeColumns="True" CanUserSortColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="Property" Header="{x:Static resources:Resources.Property}" Binding="{Binding Property}" Width="*"/>
+                        <DataGridTextColumn x:Name="Value" Header="{x:Static resources:Resources.Value}" Binding="{Binding Value}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+</Window>
